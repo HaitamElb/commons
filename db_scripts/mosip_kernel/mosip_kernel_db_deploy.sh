@@ -11,22 +11,42 @@
 #########Properties file #############
 set -e
 properties_file="$1"
-echo `date "+%m/%d/%Y %H:%M:%S"` ": $properties_file"
-#properties_file="./app.properties"
-if [ -f "$properties_file" ]
-then
-    echo `date "+%m/%d/%Y %H:%M:%S"` ": Property file \"$properties_file\" found."
-    while IFS='=' read -r key value
-    do
-        key=$(echo $key | tr '.' '_')
-         eval ${key}=\${value}
-   done < "$properties_file"
+echo "$(date "+%m/%d/%Y %H:%M:%S") : $properties_file"
+
+if [ -f "$properties_file" ]; then
+    echo "$(date "+%m/%d/%Y %H:%M:%S") : Property file \"$properties_file\" found."
+    while IFS='=' read -r key value; do
+        # Skip empty lines and lines that start with a hash (comments)
+        if [[ -z "$key" || "$key" =~ ^# ]]; then
+            continue
+        fi
+        
+        # Trim leading and trailing whitespaces
+        key=$(echo "$key" | tr -d '[:space:]')
+        value=$(echo "$value" | tr -d '[:space:]')
+
+        # Skip lines with empty keys
+        if [[ -z "$key" ]]; then
+            continue
+        fi
+
+        # Replace dots with underscores in the key
+        key=$(echo "$key" | tr '.' '_')
+
+        # Debugging: Print the key-value pair before evaluation
+        echo "Setting variable: ${key}='${value}'"
+
+        # Use eval to set the variable, with proper quoting
+        eval "${key}='${value}'"
+    done < "$properties_file"
 else
-    echo `date "+%m/%d/%Y %H:%M:%S"` ": Property file not found, Pass property file name as argument."
+    echo "$(date "+%m/%d/%Y %H:%M:%S") : Property file not found, Pass property file name as argument."
+    exit 1
 fi
-echo `date "+%m/%d/%Y %H:%M:%S"` ": ------------------ Database server and service status check for ${MOSIP_DB_NAME}------------------------"
-##############################################LOG FILE CREATION#############################################################
-today=`date '+%d%m%Y_%H%M%S'`;
+
+echo "$(date "+%m/%d/%Y %H:%M:%S") : ------------------ Database server and service status check for ${MOSIP_DB_NAME} ------------------------"
+
+today=`date '+%d%m%Y_%H%M%S'`
 LOG="${LOG_PATH}${MOSIP_DB_NAME}-${today}.log"
 touch $LOG
 
@@ -41,14 +61,14 @@ fi
 
 echo `date "+%m/%d/%Y %H:%M:%S"` ": ----------------------------------------------------------------------------------------"
 
-    echo `date "+%m/%d/%Y %H:%M:%S"` ": Started sourcing the $MOSIP_DB_NAME Database scripts" | tee -a $LOG 2>&1
+echo `date "+%m/%d/%Y %H:%M:%S"` ": Started sourcing the $MOSIP_DB_NAME Database scripts" | tee -a $LOG 2>&1
 #echo "date:" `date "+%m/%d/%Y %H:%M:%S"`
-    echo `date "+%m/%d/%Y %H:%M:%S"` ": Database scripts are sourcing from :$BASEPATH" | tee -a $LOG 2>&1
+echo `date "+%m/%d/%Y %H:%M:%S"` ": Database scripts are sourcing from :$BASEPATH" | tee -a $LOG 2>&1
 
 #========================================DB Deployment process begins on KERNEL DB SERVER======================================
 
 echo `date "+%m/%d/%Y %H:%M:%S"` ": Database deployment on $MOSIP_DB_NAME database is started...." | tee -a $LOG 2>&1
-cd /$BASEPATH/$MOSIP_DB_NAME/
+cd $BASEPATH/$MOSIP_DB_NAME/
 VALUE=$(PGPASSWORD=$SU_USER_PWD  psql --username=$SU_USER --host=$DB_SERVERIP --port=$DB_PORT --dbname=$DEFAULT_DB_NAME -t -c "select count(1) from pg_roles where rolname IN('sysadmin','appadmin','dbadmin')";exit; >> $LOG 2>&1)
     echo `date "+%m/%d/%Y %H:%M:%S"` ": Checking for existing users.... Count of existing users:"$VALUE | tee -a $LOG 2>&1
 if [ ${VALUE} == 0 ]

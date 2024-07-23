@@ -11,29 +11,47 @@
 #########Properties file #############
 set -e
 properties_file="$1"
-echo `date "+%m/%d/%Y %H:%M:%S"` ": $properties_file"
-#properties_file="./app.properties"
-if [ -f "$properties_file" ]
-then
-    echo `date "+%m/%d/%Y %H:%M:%S"` ": Property file \"$properties_file\" found."
-    while IFS='=' read -r key value
-    do
-        key=$(echo $key | tr '.' '_')
-         eval ${key}=\${value}
-   done < "$properties_file"
-else
-    echo `date "+%m/%d/%Y %H:%M:%S"` ": Property file not found, Pass property file name as argument."
-fi
-echo `date "+%m/%d/%Y %H:%M:%S"` ": ------------------ Database server and service status check for ${MOSIP_DB_NAME}------------------------"
-##############################################LOG FILE CREATION#############################################################
+echo "$(date "+%m/%d/%Y %H:%M:%S") : $properties_file"
 
-today=`date '+%d%m%Y_%H%M%S'`;
+if [ -f "$properties_file" ]; then
+    echo "$(date "+%m/%d/%Y %H:%M:%S") : Property file \"$properties_file\" found."
+    while IFS='=' read -r key value; do
+        # Skip empty lines and lines that start with a hash (comments)
+        if [[ -z "$key" || "$key" =~ ^# ]]; then
+            continue
+        fi
+        
+        # Trim leading and trailing whitespaces
+        key=$(echo "$key" | tr -d '[:space:]')
+        value=$(echo "$value" | tr -d '[:space:]')
+
+        # Skip lines with empty keys
+        if [[ -z "$key" ]]; then
+            continue
+        fi
+
+        # Replace dots with underscores in the key
+        key=$(echo "$key" | tr '.' '_')
+
+        # Debugging: Print the key-value pair before evaluation
+        echo "Setting variable: ${key}='${value}'"
+
+        # Use eval to set the variable, with proper quoting
+        eval "${key}='${value}'"
+    done < "$properties_file"
+else
+    echo "$(date "+%m/%d/%Y %H:%M:%S") : Property file not found, Pass property file name as argument."
+    exit 1
+fi
+
+echo "$(date "+%m/%d/%Y %H:%M:%S") : ------------------ Database server and service status check for ${MOSIP_DB_NAME} ------------------------"
+
+today=`date '+%d%m%Y_%H%M%S'`
 LOG="${LOG_PATH}${MOSIP_DB_NAME}-${today}.log"
 touch $LOG
 
-
 SERVICE=$(PGPASSWORD=$SU_USER_PWD  psql --username=$SU_USER --host=$DB_SERVERIP --port=$DB_PORT --dbname=$DEFAULT_DB_NAME -t -c "select count(1) from pg_roles where rolname IN('sysadmin')";exit; > /dev/null)
-
+  
 if [ "$SERVICE" -eq 0 ] || [ "$SERVICE" -eq 1 ]
 then
 echo `date "+%m/%d/%Y %H:%M:%S"` ": Postgres database server and service is up and running" | tee -a $LOG 2>&1
@@ -44,12 +62,13 @@ fi
 echo `date "+%m/%d/%Y %H:%M:%S"` ": ----------------------------------------------------------------------------------------"
 
 echo `date "+%m/%d/%Y %H:%M:%S"` ": Started sourcing the $MOSIP_DB_NAME Database scripts" | tee -a $LOG 2>&1
+#echo "date:" `date "+%m/%d/%Y %H:%M:%S"`
 echo `date "+%m/%d/%Y %H:%M:%S"` ": Database scripts are sourcing from :$BASEPATH" | tee -a $LOG 2>&1
 
 #========================================DB Deployment process begins on MASTER DB SERVER======================================
 
 echo `date "+%m/%d/%Y %H:%M:%S"` ": Database deployment on $MOSIP_DB_NAME database is started...." | tee -a $LOG 2>&1
-cd /$BASEPATH/$MOSIP_DB_NAME/
+cd $BASEPATH/$MOSIP_DB_NAME/
 VALUE=$(PGPASSWORD=$SU_USER_PWD  psql --username=$SU_USER --host=$DB_SERVERIP --port=$DB_PORT --dbname=$DEFAULT_DB_NAME -t -c "select count(1) from pg_roles where rolname IN('sysadmin','appadmin','dbadmin')";exit; >> $LOG 2>&1)
     echo `date "+%m/%d/%Y %H:%M:%S"` ": Checking for existing users.... Count of existing users:"$VALUE | tee -a $LOG 2>&1
 if [ ${VALUE} == 0 ]
@@ -90,17 +109,13 @@ PGPASSWORD=$SYSADMIN_PWD psql --username=$SYSADMIN_USER --host=$DB_SERVERIP --po
 PGPASSWORD=$SYSADMIN_PWD psql --username=$SYSADMIN_USER --host=$DB_SERVERIP --port=$DB_PORT --dbname=$DEFAULT_DB_NAME -f $DDL_FILENAME >> $LOG 2>&1
 
 
-if [ ${DML_FLAG} == 1 ]
-then
-    echo `date "+%m/%d/%Y %H:%M:%S"` ": Converting Excel to CSV for ${MOSIP_DB_NAME} database" | tee -a $LOG 2>&1
-    pip3 install xlrd==1.2.0
-    python3 xlsx_to_csv.py
 
-    echo `date "+%m/%d/%Y %H:%M:%S"` ": Deploying DML for ${MOSIP_DB_NAME} database" | tee -a $LOG 2>&1
-    PGPASSWORD=$SYSADMIN_PWD psql --username=$SYSADMIN_USER --host=$DB_SERVERIP --port=$DB_PORT --dbname=$DEFAULT_DB_NAME -a -b -f $DML_FILENAME >> $LOG 2>&1
-else
-    echo `date "+%m/%d/%Y %H:%M:%S"` ": There are no DML deployment required for ${MOSIP_DB_NAME}" | tee -a $LOG 2>&1
-fi
+echo `date "+%m/%d/%Y %H:%M:%S"` ": Converting Excel to CSV for ${MOSIP_DB_NAME} database" | tee -a $LOG 2>&1
+pip3 install xlrd==1.2.0
+python xlsx_to_csv.py
+
+echo `date "+%m/%d/%Y %H:%M:%S"` ": Deploying DML for ${MOSIP_DB_NAME} database" | tee -a $LOG 2>&1
+PGPASSWORD=$SYSADMIN_PWD psql --username=$SYSADMIN_USER --host=$DB_SERVERIP --port=$DB_PORT --dbname=$DEFAULT_DB_NAME -a -b -f $DML_FILENAME >> $LOG 2>&1
 
 if [ $(grep -c ERROR $LOG) -ne 0 ]
 then
