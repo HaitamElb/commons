@@ -1,0 +1,4 @@
+07/23/2024 09:49:39 : Postgres database server and service is up and running
+07/23/2024 09:49:40 : Started sourcing the mosip_iam Database scripts
+07/23/2024 09:49:40 : Database scripts are sourcing from :C:/Users/hp/Desktop/mosip/commons/db_scripts/mosip_iam
+07/23/2024 09:49:40 : Database deployment on mosip_iam database is started....

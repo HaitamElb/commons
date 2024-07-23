@@ -1,0 +1,128 @@
+07/23/2024 09:50:34 : Postgres database server and service is up and running
+07/23/2024 09:50:34 : Started sourcing the mosip_iam Database scripts
+07/23/2024 09:50:34 : Database scripts are sourcing from :C:/Users/hp/Desktop/mosip/commons/db_scripts/
+07/23/2024 09:50:34 : Database deployment on mosip_iam database is started....
+07/23/2024 09:50:34 : Checking for existing users.... Count of existing users: 3
+07/23/2024 09:50:34 : Database users already exist
+07/23/2024 09:50:34 : No active database connections exist on mosip_iam
+07/23/2024 09:50:34 : Creating iam database user
+psql:mosip_role_iamuser.sql:1: NOTICE:  role "iamuser" does not exist, skipping
+DROP ROLE
+CREATE ROLE
+psql:mosip_iam_db.sql:1: NOTICE:  database "mosip_iam" does not exist, skipping
+DROP DATABASE
+CREATE DATABASE
+COMMENT
+You are now connected to database "mosip_iam" as user "sysadmin".
+psql:mosip_iam_db.sql:16: NOTICE:  schema "iam" does not exist, skipping
+DROP SCHEMA
+CREATE SCHEMA
+ALTER SCHEMA
+ALTER DATABASE
+You are now connected to database "mosip_iam" as user "sysadmin".
+GRANT
+GRANT
+GRANT
+GRANT
+GRANT
+GRANT
+ALTER DEFAULT PRIVILEGES
+GRANT
+You are now connected to database "mosip_iam" as user "sysadmin".
+CREATE TABLE
+COMMENT
+COMMENT
+COMMENT
+COMMENT
+COMMENT
+COMMENT
+COMMENT
+COMMENT
+COMMENT
+COMMENT
+COMMENT
+CREATE TABLE
+COMMENT
+COMMENT
+COMMENT
+COMMENT
+COMMENT
+COMMENT
+COMMENT
+COMMENT
+COMMENT
+COMMENT
+COMMENT
+COMMENT
+COMMENT
+COMMENT
+COMMENT
+COMMENT
+COMMENT
+COMMENT
+CREATE TABLE
+COMMENT
+COMMENT
+COMMENT
+COMMENT
+COMMENT
+COMMENT
+COMMENT
+COMMENT
+COMMENT
+COMMENT
+COMMENT
+COMMENT
+COMMENT
+COMMENT
+COMMENT
+COMMENT
+COMMENT
+COMMENT
+COMMENT
+CREATE TABLE
+COMMENT
+COMMENT
+COMMENT
+COMMENT
+COMMENT
+COMMENT
+COMMENT
+COMMENT
+COMMENT
+COMMENT
+COMMENT
+COMMENT
+COMMENT
+CREATE TABLE
+COMMENT
+COMMENT
+COMMENT
+COMMENT
+COMMENT
+COMMENT
+COMMENT
+COMMENT
+COMMENT
+COMMENT
+COMMENT
+CREATE TABLE
+COMMENT
+COMMENT
+COMMENT
+COMMENT
+COMMENT
+COMMENT
+COMMENT
+COMMENT
+COMMENT
+COMMENT
+COMMENT
+COMMENT
+ALTER TABLE
+ALTER TABLE
+ALTER TABLE
+07/23/2024 09:50:36 : There are no DML deployment required for mosip_iam
+07/23/2024 09:50:36 : Database deployment completed successfully, Please check the logs for more information
+07/23/2024 09:50:36 : END of MOSIP "mosip_iam" database deployment
+******************************************07/23/2024 09:50:36 *****************************************************
