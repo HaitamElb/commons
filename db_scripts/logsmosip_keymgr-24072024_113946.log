@@ -1,0 +1,167 @@
+07/24/2024 11:39:46 : Postgres database server and service is up and running
+07/24/2024 11:39:46 : Started sourcing the mosip_keymgr Database scripts
+07/24/2024 11:39:46 : Database scripts are sourcing from :C:/Users/hp/Desktop/mosip/commons/db_scripts/
+07/24/2024 11:39:46 : Database deployment on mosip_keymgr database is started....
+07/24/2024 11:39:47 : Checking for existing users.... Count of existing users: 3
+07/24/2024 11:39:47 : Database users already exist
+07/24/2024 11:39:47 : No active database connections exist on mosip_keymgr
+07/24/2024 11:39:47 : Key Manager user already exist
+psql:mosip_keymgr_db.sql:1: NOTICE:  database "mosip_keymgr" does not exist, skipping
+DROP DATABASE
+CREATE DATABASE
+COMMENT
+You are now connected to database "mosip_keymgr" as user "sysadmin".
+psql:mosip_keymgr_db.sql:16: NOTICE:  schema "keymgr" does not exist, skipping
+DROP SCHEMA
+CREATE SCHEMA
+ALTER SCHEMA
+ALTER DATABASE
+You are now connected to database "mosip_keymgr" as user "sysadmin".
+GRANT
+GRANT
+GRANT
+GRANT
+GRANT
+GRANT
+ALTER DEFAULT PRIVILEGES
+GRANT
+You are now connected to database "mosip_keymgr" as user "sysadmin".
+CREATE TABLE
+COMMENT
+COMMENT
+COMMENT
+COMMENT
+COMMENT
+COMMENT
+COMMENT
+COMMENT
+COMMENT
+COMMENT
+COMMENT
+COMMENT
+COMMENT
+COMMENT
+CREATE TABLE
+COMMENT
+COMMENT
+COMMENT
+COMMENT
+COMMENT
+COMMENT
+COMMENT
+COMMENT
+COMMENT
+COMMENT
+CREATE TABLE
+COMMENT
+COMMENT
+COMMENT
+COMMENT
+COMMENT
+COMMENT
+COMMENT
+COMMENT
+COMMENT
+COMMENT
+COMMENT
+CREATE TABLE
+COMMENT
+COMMENT
+COMMENT
+COMMENT
+COMMENT
+COMMENT
+COMMENT
+COMMENT
+COMMENT
+COMMENT
+COMMENT
+CREATE TABLE
+COMMENT
+COMMENT
+COMMENT
+COMMENT
+COMMENT
+COMMENT
+COMMENT
+COMMENT
+CREATE TABLE
+COMMENT
+COMMENT
+COMMENT
+COMMENT
+COMMENT
+COMMENT
+COMMENT
+COMMENT
+COMMENT
+COMMENT
+COMMENT
+COMMENT
+COMMENT
+COMMENT
+COMMENT
+COMMENT
+COMMENT
+COMMENT
+CREATE TABLE
+COMMENT
+COMMENT
+COMMENT
+COMMENT
+COMMENT
+COMMENT
+COMMENT
+COMMENT
+COMMENT
+COMMENT
+COMMENT
+COMMENT
+COMMENT
+COMMENT
+COMMENT
+COMMENT
+COMMENT
+COMMENT
+COMMENT
+COMMENT
+CREATE TABLE
+COMMENT
+COMMENT
+COMMENT
+COMMENT
+COMMENT
+COMMENT
+COMMENT
+COMMENT
+COMMENT
+COMMENT
+COMMENT
+CREATE TABLE
+COMMENT
+COMMENT
+COMMENT
+COMMENT
+COMMENT
+COMMENT
+COMMENT
+COMMENT
+COMMENT
+COMMENT
+CREATE TABLE
+COMMENT
+COMMENT
+COMMENT
+COMMENT
+COMMENT
+COMMENT
+COMMENT
+COMMENT
+COMMENT
+COMMENT
+ALTER TABLE
+ALTER TABLE
+07/24/2024 11:39:48 : There are no DML deployment required for mosip_keymgr
+07/24/2024 11:39:48 : Database deployment completed successfully, Please check the logs for more information
+07/24/2024 11:39:48 : END of MOSIP "mosip_keymgr" database deployment
+******************************************07/24/2024 11:39:48 *****************************************************

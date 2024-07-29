@@ -1,0 +1,102 @@
+07/26/2024 12:01:07 : Postgres database server and service is up and running
+07/26/2024 12:01:07 : Started sourcing the mosip_kernel Database scripts
+07/26/2024 12:01:07 : Database scripts are sourcing from :C:/Users/hp/Desktop/mosip/commons/db_scripts
+07/26/2024 12:01:07 : Database deployment on mosip_kernel database is started....
+07/26/2024 12:01:08 : Checking for existing users.... Count of existing users: 3
+07/26/2024 12:01:08 : Database users already exist
+07/26/2024 12:01:08 : No active database connections exist on mosip_kernel
+07/26/2024 12:01:08 : Creating kernel database user
+CREATE ROLE
+psql:mosip_kernel_db.sql:1: NOTICE:  database "mosip_kernel" does not exist, skipping
+DROP DATABASE
+CREATE DATABASE
+COMMENT
+You are now connected to database "mosip_kernel" as user "sysadmin".
+psql:mosip_kernel_db.sql:16: NOTICE:  schema "kernel" does not exist, skipping
+DROP SCHEMA
+CREATE SCHEMA
+ALTER SCHEMA
+ALTER DATABASE
+You are now connected to database "mosip_kernel" as user "sysadmin".
+GRANT
+GRANT
+GRANT
+GRANT
+GRANT
+GRANT
+ALTER DEFAULT PRIVILEGES
+GRANT
+You are now connected to database "mosip_kernel" as user "sysadmin".
+CREATE TABLE
+COMMENT
+COMMENT
+COMMENT
+COMMENT
+COMMENT
+COMMENT
+COMMENT
+COMMENT
+COMMENT
+COMMENT
+COMMENT
+COMMENT
+COMMENT
+COMMENT
+COMMENT
+COMMENT
+CREATE TABLE
+COMMENT
+COMMENT
+COMMENT
+COMMENT
+COMMENT
+COMMENT
+COMMENT
+COMMENT
+COMMENT
+CREATE TABLE
+COMMENT
+COMMENT
+COMMENT
+COMMENT
+COMMENT
+COMMENT
+COMMENT
+COMMENT
+COMMENT
+COMMENT
+CREATE TABLE
+COMMENT
+COMMENT
+COMMENT
+COMMENT
+COMMENT
+COMMENT
+COMMENT
+COMMENT
+COMMENT
+CREATE TABLE
+COMMENT
+COMMENT
+COMMENT
+COMMENT
+COMMENT
+COMMENT
+COMMENT
+COMMENT
+COMMENT
+CREATE TABLE
+COMMENT
+COMMENT
+COMMENT
+COMMENT
+COMMENT
+COMMENT
+COMMENT
+COMMENT
+COMMENT
+COMMENT
+07/26/2024 12:01:09 : There are no DML deployment required for mosip_kernel
+07/26/2024 12:01:09 : Database deployment completed successfully, Please check the logs for more information
+07/26/2024 12:01:09 : END of MOSIP "mosip_kernel" database deployment
+******************************************07/26/2024 12:01:09 *****************************************************

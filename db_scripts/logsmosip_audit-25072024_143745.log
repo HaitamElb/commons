@@ -1,0 +1,55 @@
+07/25/2024 14:37:46 : Postgres database server and service is up and running
+07/25/2024 14:37:46 : Started sourcing the mosip_audit Database scripts
+07/25/2024 14:37:46 : Database scripts are sourcing from :C:/Users/hp/Desktop/mosip/commons/db_scripts/
+07/25/2024 14:37:46 : Database deployment on mosip_audit database is started....
+07/25/2024 14:37:46 : Checking for existing users.... Count of existing users: 3
+07/25/2024 14:37:46 : Database users already exist
+07/25/2024 14:37:46 : No active database connections exist on mosip_audit
+07/25/2024 14:37:46 : Creating audit database user
+psql:mosip_role_audituser.sql:1: NOTICE:  role "audituser" does not exist, skipping
+DROP ROLE
+CREATE ROLE
+psql:mosip_audit_db.sql:1: NOTICE:  database "mosip_audit" does not exist, skipping
+DROP DATABASE
+CREATE DATABASE
+COMMENT
+You are now connected to database "mosip_audit" as user "sysadmin".
+psql:mosip_audit_db.sql:17: NOTICE:  schema "audit" does not exist, skipping
+DROP SCHEMA
+CREATE SCHEMA
+ALTER SCHEMA
+ALTER DATABASE
+You are now connected to database "mosip_audit" as user "sysadmin".
+GRANT
+GRANT
+GRANT
+GRANT
+GRANT
+GRANT
+ALTER DEFAULT PRIVILEGES
+GRANT
+You are now connected to database "mosip_audit" as user "sysadmin".
+CREATE TABLE
+COMMENT
+COMMENT
+COMMENT
+COMMENT
+COMMENT
+COMMENT
+COMMENT
+COMMENT
+COMMENT
+COMMENT
+COMMENT
+COMMENT
+COMMENT
+COMMENT
+COMMENT
+COMMENT
+COMMENT
+COMMENT
+COMMENT
+07/25/2024 14:37:47 : There are no DML deployment required for mosip_audit
+07/25/2024 14:37:47 : Database deployment completed successfully, Please check the logs for more information
+07/25/2024 14:37:47 : END of MOSIP "mosip_audit" database deployment
+******************************************07/25/2024 14:37:48 *****************************************************
